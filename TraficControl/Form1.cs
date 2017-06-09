@@ -32,7 +32,14 @@ namespace TraficControl
         {
             
             IImage image1= video.QueryFrame();
+            List<Rectangle> faces = new List<Rectangle>();
+            DetectFace.Detect(image1,@"cascade\haarcascade_frontalface_default.xml", faces);
+            foreach (Rectangle face in faces)
+            {
+                CvInvoke.Rectangle(image1, face, new Bgr(Color.Red).MCvScalar, 2);
+            }
             imageBox1.Image = image1;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
